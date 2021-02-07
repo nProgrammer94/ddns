@@ -9,5 +9,5 @@ Uses the full Google Dynamic DNS API found [here](https://support.google.com/dom
 2. Install dotnet core on your server [link](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu)
 3. Copy build zip to server and unzip.
 4. Change config in appsetting.json.
-5. setup Systemd for run job automatic.
+5. setup Systemd for run job automatic [link](https://github.com/nProgrammer94/ddns/tree/main/ddns/ddns/systemd).
 
