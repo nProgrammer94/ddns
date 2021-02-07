@@ -27,10 +27,8 @@ namespace ddns
                 WebClient wc = new WebClient();
                 wc.Credentials = new NetworkCredential(domain.UserName.Trim(), domain.Password.Trim());
                 var response = wc.DownloadString(url);
-                if (response.Contains("good"))
+                if (response.Contains("good") || response.Contains("nochg"))
                     status = true;
-
-
             }
             catch (Exception ex)
             {
