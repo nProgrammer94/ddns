@@ -3,7 +3,7 @@ Description=15min timer
 
 [Timer]
 OnBootSec=10
-OnUnitActiveSec=10
+OnUnitActiveSec=3h
 AccuracySec=1ms
 
 [Install]
