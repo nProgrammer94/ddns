@@ -1,1 +1,1 @@
-# ddns
+Dynamic DNS API
