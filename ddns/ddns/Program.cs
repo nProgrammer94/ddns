@@ -8,7 +8,7 @@ namespace ddns
 {
     class Program
     {
-		private static List<Domain> domain;
+		private static List<Domain> domain = new List<Domain>();
         static void Main(string[] args)
         {
 			
@@ -44,8 +44,8 @@ namespace ddns
 			Log.Logger = new LoggerConfiguration()
 				.ReadFrom.Configuration(configuration)
 				.CreateLogger();
-			var list = new List<Domain>();
-			configuration.GetSection("GoogleDomain").Bind(list);
+			configuration.GetSection("GoogleDomain").Bind(domain);
+			
         }
 
 		private static void RunApp()
