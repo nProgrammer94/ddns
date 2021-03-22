@@ -1,0 +1,2 @@
+2021-03-20 07:46:40.128 +00:00 [ERR] Appsettings invalid
+2021-03-20 07:46:47.007 +00:00 [ERR] Appsettings invalid

@@ -1,13 +1,14 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Serilog;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 
 namespace ddns
 {
     class Program
     {
-		private static Domain domain;
+		private static List<Domain> domain;
         static void Main(string[] args)
         {
 			
@@ -16,7 +17,8 @@ namespace ddns
 			Log.Information("Start Rquest.");
 			try
 			{
-				if(string.IsNullOrWhiteSpace(domain.HostName) || string.IsNullOrWhiteSpace(domain.UserName) || string.IsNullOrWhiteSpace(domain.Password))
+
+				if(domain.Count < 0 || string.IsNullOrWhiteSpace(domain[0].HostName) || string.IsNullOrWhiteSpace(domain[0].UserName) || string.IsNullOrWhiteSpace(domain[0].Password))
                 {
 					Log.Error("Appsettings invalid");
 					return;
@@ -42,21 +44,25 @@ namespace ddns
 			Log.Logger = new LoggerConfiguration()
 				.ReadFrom.Configuration(configuration)
 				.CreateLogger();
-
-            var appSettingsSection = configuration.GetSection("GoogleDomain");
-            domain = appSettingsSection.Get<Domain>();
+			var list = new List<Domain>();
+			configuration.GetSection("GoogleDomain").Bind(list);
         }
 
 		private static void RunApp()
 		{
 
 			// Do not pass any logger in via Dependency Injection, as the class will simply reference the static logger.
-			var GoogleDNS = new GoogleDNS(domain);
-            var result = GoogleDNS.Request();
-			if (result)
-				Log.Information("Success");
-			else
-				Log.Error("Failed");
+			domain.ForEach(x =>
+			{
+				var GoogleDNS = new GoogleDNS(x);
+				var result = GoogleDNS.Request();
+				if (result)
+					Log.Information("Success");
+				else
+					Log.Error("Failed");
+
+			});
+			
 		}
     }
 }
