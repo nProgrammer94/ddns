@@ -4,7 +4,7 @@ Description=ddns
 [Service]
 WorkingDirectory=/var/www/ddns
 #ExecStart=/usr/bin/dotnet /var/www/ddns/ddns.dll
-ExecStart=/root/dotnet-arm64/dotnet /var/www/ddns/ddns.dll
+ExecStart=/root/dotnet/dotnet /var/www/ddns/ddns.dll
 Restart=always
 # Restart service after 10 seconds if the dotnet service crashes:
 RestartSec=10
