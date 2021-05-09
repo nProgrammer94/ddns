@@ -3,18 +3,18 @@
 sudo apt update
 
 sudo apt install -y \
-     apt-transport-https \
-     ca-certificates \
-     curl \
-     gnupg2 \
-     software-properties-common
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    software-properties-common
 
 
 curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
 
 
 echo "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
-     $(lsb_release -cs) stable" | \
+    $(lsb_release -cs) stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list
 
 
@@ -66,3 +66,9 @@ sudo systemctl start kestrel-ddns.service
 
 sudo systemctl enable kestrel-ddns.timer
 sudo systemctl start kestrel-ddns.timer
+
+# Install nginx
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo systemctl enable nginx
+sudo systemctl start nginx
